@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport Éditorial - Doctrine du Caractère</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bibliothèque pour la génération de PDF côté client -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Masquage par défaut de la vue d'impression à l'écran */
+        .print-only {
+            display: none;
+        }
+
+        /* Classe activée uniquement pendant l'export PDF pour rendre le contenu "visible" au moteur de capture */
+        .is-exporting-pdf .print-only {
+            display: block !important;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 794px; /* Largeur A4 approximative en px à 96dpi */
+            z-index: -9999;
+            background: white;
+        }
+
+        /* Masquage des éléments inutiles pendant l'export */
+        .is-exporting-pdf main, 
+        .is-exporting-pdf header, 
+        .is-exporting-pdf footer {
+            display: none !important;
+        }
+
+        @media print {
+            @page {
+                margin: 1.5cm;
+                size: A4;
+            }
+            
+            header, aside, footer, .no-print, button, .version-switcher {
+                display: none !important;
+            }
+            
+            body {
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            main {
+                display: none !important;
+            }
+            
+            .print-only {
+                display: block !important;
+            }
+            
+            .section-break {
+                page-break-before: always;
+                margin-top: 2rem;
+            }
+            
+            section {
+                box-shadow: none !important;
+                border: 1px solid #e2e8f0 !important;
+                page-break-inside: avoid;
+                margin-bottom: 1.5rem;
+            }
+
+            .bg-slate-50 { background-color: #f8fafc !important; }
+            .bg-slate-100 { background-color: #f1f5f9 !important; }
+            .bg-indigo-50 { background-color: #eef2ff !important; }
+            .bg-indigo-100 { background-color: #e0e7ff !important; }
+            .bg-indigo-600 { background-color: #4f46e5 !important; }
+            .bg-indigo-950 { background-color: #1e1b4b !important; }
+            .bg-emerald-50 { background-color: #ecfdf5 !important; }
+            .bg-emerald-500 { background-color: #10b981 !important; }
+            .bg-rose-50 { background-color: #fff1f2 !important; }
+            .bg-rose-500 { background-color: #f43f5e !important; }
+            .bg-amber-400 { background-color: #fbbf24 !important; }
+            
+            .text-indigo-600 { color: #4f46e5 !important; }
+            .text-indigo-950 { color: #1e1b4b !important; }
+            
+            .border-indigo-600 { border-color: #4f46e5 !important; }
+            .border-indigo-100 { border-color: #e0e7ff !important; }
+            
+            p, span, li {
+                color: #1e293b !important;
+            }
+        }
+
+        /* Forcer le rendu des couleurs pour html2pdf */
+        .pdf-export-mode section {
+            box-shadow: none !important;
+            border: 1px solid #e2e8f0 !important;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+  }
+}
+</script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+    <div id="root"></div>
+</body>
+</html>
